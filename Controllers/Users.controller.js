@@ -26,39 +26,37 @@ UserRouter.get('/',(req,res,next)=>
 
   }).catch((err)=>
   {
-    return res.status(401).jason({
+    return res.status(401).json({
       message:"error"
     })
   });
 })
 
-UserRouter.post("/create",(req,res,next)=>
-{
-  const data=req.body;
+UserRouter.post("/create", (req, res, next) => {
+  const data = req.body;
   console.log(data);
-  const User=new UserModel(data);
-  User.save().then((result)=>
-  {
-    if(result&& result.id)
-    {
-      return res.status(200).json({
-        message:"created ",
-        data:result
 
-      });
-    }
-  }).catch((error)=>
-  {
-    return res.status(401).json({
-      message:"failure",
-
+  const User = new UserModel(data);
+  User.save()
+    .then((result) => {
+      if (result && result._id) { // Check for _id instead of id
+        return res.status(200).json({
+          message: "User created",
+          data: result,
+        });
+      } else {
+        return res.status(400).json({
+          message: "User not created",
+        });
+      }
     })
-
-  })
-
-
-
-})
+    .catch((error) => {
+      console.error(error); // Log the error for debugging
+      return res.status(500).json({
+        message: "Internal server error",
+      });
+    });
+});
 
 
 module.exports = UserRouter;

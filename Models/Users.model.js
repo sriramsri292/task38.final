@@ -6,9 +6,10 @@ const { Schema } = mongoose;
 const UserSchema = new Schema({
   firstName: {
     type: String,
-    required: true,
+    
   },
   lastName: String,
+  name: String,
   dob: Date,
   email: String,
   phoneNumber: String,
@@ -16,7 +17,7 @@ const UserSchema = new Schema({
   age: Number,
   password: {
     type: String,
-    required: true,
+    
   },
   addressDetails: {
     addressLine1: String,
