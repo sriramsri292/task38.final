@@ -42,7 +42,7 @@ UserRouter.post("/create", (req, res, next) => {
       if (result && result._id) { // Check for _id instead of id
         return res.status(200).json({
           message: "User created",
-          data: result,
+          data: result
         });
       } else {
         return res.status(400).json({
@@ -60,6 +60,7 @@ UserRouter.post("/create", (req, res, next) => {
 
 
 module.exports = UserRouter;
+
 
 /*  
 
